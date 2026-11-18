@@ -22,8 +22,26 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 VERSION = "0.1.0"
-# Set when the companion guide has a public page; printed once below the report.
-GUIDE_URL = os.environ.get("AGENTLINT_GUIDE_URL", "https://tobiaszander.de/agent-gates/")
+# Companion guide, printed once below the report (German page when the locale is German).
+# AGENTLINT_GUIDE_URL overrides it; set it empty to hide the line.
+
+
+def _default_guide_url():
+    for var in ("LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE"):
+        val = os.environ.get(var, "")
+        if val:
+            break
+    else:
+        try:  # Windows and others without locale variables, e.g. "German_Germany" or "de_DE"
+            import locale
+            val = locale.getlocale()[0] or ""
+        except Exception:
+            val = ""
+    german = val.lower().startswith(("de", "german"))
+    return "https://tobiaszander.de/agent-gates/" + ("de/" if german else "")
+
+
+GUIDE_URL = os.environ.get("AGENTLINT_GUIDE_URL", _default_guide_url())
 
 SEVERITIES = ["info", "low", "medium", "high"]
 
