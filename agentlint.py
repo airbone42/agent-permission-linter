@@ -23,7 +23,7 @@ from pathlib import Path
 
 VERSION = "0.1.0"
 # Set when the companion guide has a public page; printed once below the report.
-GUIDE_URL = os.environ.get("AGENTLINT_GUIDE_URL", "")
+GUIDE_URL = os.environ.get("AGENTLINT_GUIDE_URL", "https://tobiaszander.de/agent-gates/")
 
 SEVERITIES = ["info", "low", "medium", "high"]
 

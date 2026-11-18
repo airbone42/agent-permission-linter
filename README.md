@@ -55,6 +55,11 @@ Scanned files: `.claude/settings.json`, `.claude/settings.local.json`, `.mcp.jso
 
 The rules are heuristics. A finding is a question to answer ("do I need this?"), not proof of a vulnerability.
 
+The report ends with a link to my guide on approval gates for AI agents
+([tobiaszander.de/agent-gates](https://tobiaszander.de/agent-gates/?ref=gh)): how to give agents enough rights to work
+without handing them the keys. Set `AGENTLINT_GUIDE_URL=` (empty) to hide it. Nothing is sent anywhere, the link is
+only printed.
+
 ## Development
 
 ```bash
