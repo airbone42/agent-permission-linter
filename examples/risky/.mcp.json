@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {"GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_EXAMPLEexampleEXAMPLEexample0000000000"}
+    },
+    "fs": {"command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem@2025.1.14", "/home/me"]},
+    "box": {"command": "docker", "args": ["run", "-i", "--rm", "--privileged", "-v", "/var/run/docker.sock:/var/run/docker.sock", "acme/mcp-tools"]},
+    "notes": {"type": "http", "url": "http://notes.example.com/mcp", "headers": {"Authorization": "Bearer abcdefghijklmnop1234"}},
+    "shell": {"command": "uvx", "args": ["mcp-shell-server"]}
+  }
+}

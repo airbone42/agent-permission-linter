@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "defaultMode": "default",
+    "allow": ["Bash(npm test)", "Bash(git status)", "Bash(git diff:*)", "WebFetch(domain:docs.python.org)", "mcp__github__get_issue"],
+    "deny": ["Read(./.env*)", "Read(~/.ssh/**)", "Read(~/.aws/**)"]
+  }
+}

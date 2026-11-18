@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": ["Bash(python3:*)", "Bash(curl:*)", "Bash(git push:*)", "WebFetch", "mcp__github", "Edit(~/**)"]
+  },
+  "enableAllProjectMcpServers": true
+}
