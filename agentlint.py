@@ -21,7 +21,7 @@ import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 # Companion guide, printed once below the report (German page when the locale is German).
 # AGENTLINT_GUIDE_URL overrides it; set it empty to hide the line.
 
@@ -112,7 +112,11 @@ SECRET_PATTERNS = [
     (re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"), "private key"),
 ]
 SECRET_NAME = re.compile(r"(TOKEN|SECRET|PASSWORD|PASSWD|API_?KEY|ACCESS_?KEY|PRIVATE_?KEY|AUTH)", re.I)
-PLACEHOLDER = re.compile(r"^(\$\{?[A-Za-z_][A-Za-z0-9_]*\}?|\$\{input:[^}]+\}|<.*>|x+|\*+|changeme|your[-_ ].*|)$", re.I)
+# Variable references (not secrets): $VAR, ${VAR}, ${VAR:-default}, and the prefixed forms VS Code / dev containers
+# use: ${env:VAR}, ${input:id}, ${localEnv:VAR}, ${containerEnv:VAR}, ${config:key}, ${secret:name}.
+PLACEHOLDER = re.compile(r"^(\$[A-Za-z_][A-Za-z0-9_]*"
+                         r"|\$\{(?:(?:env|input|localEnv|containerEnv|config|secret):)?[^${}\s]+\}"
+                         r"|<.*>|x+|\*+|changeme|your[-_ ].*|)$", re.I)
 
 # Bash prefixes that are effectively "run anything" or reach outside the sandbox.
 ANY_CODE = {"bash", "sh", "zsh", "fish", "python", "python3", "node", "deno", "bun", "ruby", "perl", "php",

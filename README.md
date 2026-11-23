@@ -4,7 +4,7 @@ Find over-broad permissions in AI coding agent and MCP configurations before a p
 
 ```
 $ python3 agentlint.py examples/risky --fail-on never
-agentlint 0.1.0: 2 file(s) scanned, 19 finding(s)
+agentlint 0.1.1: 2 file(s) scanned, 19 finding(s)
 
 [HIGH  ] CC001  examples/risky/.claude/settings.json  permissions.defaultMode
          Bypass mode: the agent runs every tool without asking, including shell and network.
@@ -46,7 +46,7 @@ Scanned files: `.claude/settings.json`, `.claude/settings.local.json`, `.mcp.jso
 | CC006 | medium | broad shell plus unrestricted `WebFetch`: read-and-exfiltrate path |
 | CC007 | info | no deny rules for `.env`, `~/.ssh`, cloud credentials |
 | CC008 | medium | `enableAllProjectMcpServers`: servers from any cloned repo start unreviewed |
-| MCP001 | high | literal tokens in `env`, `headers` or `args` (GitHub, GitLab, Slack, Anthropic, OpenAI, AWS, Google, Stripe, private keys, `*_TOKEN`-style names) |
+| MCP001 | high | literal tokens in `env`, `headers` or `args` (GitHub, GitLab, Slack, Anthropic, OpenAI, AWS, Google, Stripe, private keys, `*_TOKEN`-style names); variable references (`${VAR}`, `${env:VAR}`, `${input:id}`, `${localEnv:VAR}`) are not flagged |
 | MCP002 | medium | unpinned `npx`/`uvx`/`pipx` packages, container images without tag or digest |
 | MCP003 | medium | remote MCP server over plain `http://` (not localhost) |
 | MCP004 | high/medium/low | `--privileged`, Docker socket, host root/home mounted, host networking |
